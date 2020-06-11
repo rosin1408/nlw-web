@@ -6,6 +6,7 @@ import Dropzone from '../../components/Dropzone';
 import Header from '../../components/Header';
 import EcoletaMap from '../../components/EcoletaMap';
 import Items from './Items';
+import FederalUnity from './FederalUnity';
 
 import './styles.css';
 
@@ -13,10 +14,6 @@ interface Item {
     id: number;
     title: string;
     image_url: string;
-}
-
-interface IBGEUFResponse {
-    sigla: string;
 }
 
 interface IBGECityResponse {
@@ -30,8 +27,6 @@ const CreatePoint = () => {
         email: '',
         whatsapp: ''
     });
-
-    const [ ufs, setUfs ] = useState<string[]>([]);
 
     const [ cities, setCities ] = useState<string[]>([]);
 
@@ -48,14 +43,6 @@ const CreatePoint = () => {
     const history = useHistory();
 
     useEffect(() => {
-        axios.get<IBGEUFResponse[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome').then(response => {
-            const ufInitials = response.data.map(uf => uf.sigla);
-
-            setUfs(ufInitials);
-        });
-    }, []);
-
-    useEffect(() => {
         if (selectedUf === '0') {
             return;
         }
@@ -67,9 +54,7 @@ const CreatePoint = () => {
         });
     }, [ selectedUf ]);
 
-    function handleSelectUf(event: ChangeEvent<HTMLSelectElement>) {
-        const uf = event.target.value;
-
+    function handleSelectUf(uf: string) {
         setSelectedUf(uf);
     }
 
@@ -177,23 +162,8 @@ const CreatePoint = () => {
                     <EcoletaMap onChangeLocation={ handleChangeLocation }/>
 
                     <div className="field-group">
-                        <div className="field">
-                            <label htmlFor="uf">Estado (UF)</label>
-                            <select 
-                                name="uf"
-                                id="uf"
-                                onChange={ handleSelectUf }
-                                value={ selectedUf }
-                            >
-                                <option value="0">Selecione uma uf</option>
-                                {
-                                    ufs.map(uf => (
-                                        <option key={ uf } value={ uf }>{ uf }</option>
-                                    ))
-                                }
-                            </select>
-                        </div>
-
+                        <FederalUnity onChangeUF={ handleSelectUf }/>
+                        
                         <div className="field">
                             <label htmlFor="city">Cidade</label>
                             <select
