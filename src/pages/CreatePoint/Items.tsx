@@ -8,7 +8,7 @@ interface Item {
 }
 
 interface Props {
-    onChangeItem: any;
+    onChangeItem: (selectdItems: number[]) => void;
 }
 
 const Items: React.FC<Props> = ({ onChangeItem }) => {

@@ -6,7 +6,7 @@ interface IBGEUFResponse {
 }
 
 interface Props {
-    onChangeUF: any;
+    onChangeUF: (uf: string) => void;
 }
 const FederalUnity: React.FC<Props> = ({ onChangeUF }) => {
     const [ ufs, setUfs ] = useState<string[]>([]);

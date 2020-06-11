@@ -44,12 +44,12 @@ const CreatePoint = () => {
         setSelectedCity(city);
     }
 
-    function handleInputChange(event: ChangeObject) {
+    function handleInputChange(event: { name: string, value: string }) {
         const { name, value } = event;
         setFormData({ ...formData, [name]: value });
     }
 
-    function handleSelectItem(itemsIds: [number]) {
+    function handleSelectItem(itemsIds: number[]) {
         setSelectedItems(itemsIds);
     }
 

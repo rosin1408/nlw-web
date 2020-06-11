@@ -7,7 +7,7 @@ interface IBGECityResponse {
 
 interface Props {
     selectedUf: string;
-    onChangeCity: any;
+    onChangeCity: (city: string) => void;
 }
 const City: React.FC<Props> = ({ selectedUf, onChangeCity }) => {
 

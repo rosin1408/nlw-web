@@ -4,7 +4,7 @@ interface Props {
     label: string;
     id: string;
     name: string;
-    onChange: any;
+    onChange: (value: { name: string, value: string }) => void;
 }
 const Field: React.FC<Props> = ({ label, id, name, onChange }) => {
 

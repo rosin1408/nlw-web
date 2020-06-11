@@ -3,7 +3,7 @@ import { Map, TileLayer, Marker } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
 
 interface Props {
-    onChangeLocation: any;
+    onChangeLocation: (selectedPosition: [number, number]) => void;
 }
 
 const EcoletaMap: React.FC<Props> = ({ onChangeLocation }) => {
