@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 import Dropzone from '../../components/Dropzone';
@@ -7,13 +7,13 @@ import EcoletaMap from '../../components/EcoletaMap';
 import Items from './Items';
 import FederalUnity from './FederalUnity';
 import City from './City';
+import Field from './Field';
 
 import './styles.css';
 
-interface Item {
-    id: number;
-    title: string;
-    image_url: string;
+interface ChangeObject {
+    name: string;
+    value: string;
 }
 
 const CreatePoint = () => {
@@ -44,8 +44,8 @@ const CreatePoint = () => {
         setSelectedCity(city);
     }
 
-    function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-        const { name, value } = event.target;
+    function handleInputChange(event: ChangeObject) {
+        const { name, value } = event;
         setFormData({ ...formData, [name]: value });
     }
 
@@ -100,36 +100,12 @@ const CreatePoint = () => {
                         <h2>Dados</h2>
                     </legend>
 
-                    <div className="field">
-                        <label htmlFor="name">Nome da entidade</label>
-                        <input 
-                            type="text"
-                            id="name"
-                            name="name"
-                            onChange={ handleInputChange }
-                        />
-                    </div>
+                    <Field label="Nome da Entidade" id="name" name="name"  onChange={ handleInputChange }/>
 
                     <div className="field-group">
-                        <div className="field">
-                            <label htmlFor="email">Email</label>
-                            <input 
-                                type="email"
-                                id="email"
-                                name="email"
-                                onChange={ handleInputChange }
-                            />
-                        </div>
+                        <Field label="Email" id="email" name="email"  onChange={ handleInputChange }/>
 
-                        <div className="field">
-                            <label htmlFor="whatsapp">Whatsapp</label>
-                            <input 
-                                type="text"
-                                id="whatsapp"
-                                name="whatsapp"
-                                onChange={ handleInputChange }
-                            />
-                        </div>
+                        <Field label="whatsapp" id="whatsapp" name="whatsapp"  onChange={ handleInputChange }/>
                     </div>
                 </fieldset>
 
